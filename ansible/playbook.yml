@@ -1,0 +1,35 @@
+---
+- hosts: all
+  sudo: true
+  tasks:
+   - name: Update apt cache
+     apt: update_cache=yes
+
+   - name: Install Node.js
+     apt: pkg=nodejs state=present
+
+   - name: Install NPM
+     apt: pkg=npm state=present
+
+   - name: Alternative name for nodejs for compatibility
+     alternatives: name=node path=/usr/bin/nodejs link=/usr/bin/node
+
+   - name: Install NPM packages 
+     npm: name={{item}} global=yes
+     with_items:
+      - react
+      - react-dom
+      - http-server
+      - express
+
+
+  roles:
+   - ansible-java8-oracle
+   - role: jdauphant.nginx
+     nginx_sites:
+       default:
+        - listen 80
+        - location /api/ {
+            proxy_pass http://127.0.0.1:8080/;
+          }
+

@@ -1,0 +1,28 @@
+#### Vagrant specific stuff
+.vagrant
+
+#### Node specific stuff
+node_modules
+
+#### OS X specific stuff
+.DS_store
+
+#### Gradle files
+.gradle/
+.gradletasknamecache
+build/
+
+#### IntelliJ files
+*.iml
+.idea/
+out/
+
+#### Sublime files
+*.sublime-project
+*.sublime-workspace
+
+#### JRebel files
+rebel*.xml
+
+#### Misc
+*.log
