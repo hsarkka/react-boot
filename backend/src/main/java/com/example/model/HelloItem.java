@@ -1,7 +1,7 @@
 package com.example.model;
 
 /**
- * A model object.
+ * A simple model object.
  */
 public class HelloItem {
 

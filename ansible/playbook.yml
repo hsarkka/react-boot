@@ -22,14 +22,17 @@
       - http-server
       - express
 
-
   roles:
    - ansible-java8-oracle
    - role: jdauphant.nginx
      nginx_sites:
        default:
         - listen 80
+        # Reverse-proxy API requests to Spring app
         - location /api/ {
             proxy_pass http://127.0.0.1:8080/;
           }
-
+        # Reverse-proxy other requests to Node app
+        - location / {
+            proxy_pass http://127.0.0.1:3000/;
+          }
