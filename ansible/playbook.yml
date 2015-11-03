@@ -14,14 +14,6 @@
    - name: Alternative name for nodejs for compatibility
      alternatives: name=node path=/usr/bin/nodejs link=/usr/bin/node
 
-   - name: Install NPM packages 
-     npm: name={{item}} global=yes
-     with_items:
-      - react
-      - react-dom
-      - http-server
-      - express
-
   roles:
    - ansible-java8-oracle
    - role: jdauphant.nginx
