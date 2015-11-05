@@ -16,10 +16,10 @@ public class HelloController {
     public List<HelloItem> items() {
         List<HelloItem> items = new ArrayList<>();
 
-        items.add(new HelloItem("Hello, World"));
-        items.add(new HelloItem("Foo"));
-        items.add(new HelloItem("Bar"));
-        items.add(new HelloItem("Baz"));
+        items.add(new HelloItem("123", "Hello, World"));
+        items.add(new HelloItem("234", "Foo"));
+        items.add(new HelloItem("345", "Bar"));
+        items.add(new HelloItem("456", "Baz"));
 
         return items;
     }

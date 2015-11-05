@@ -5,9 +5,11 @@ package com.example.model;
  */
 public class HelloItem {
 
+    private final String id;
     private final String name;
 
-    public HelloItem(String name) {
+    public HelloItem(String id, String name) {
+        this.id = id;
         this.name = name;
     }
 

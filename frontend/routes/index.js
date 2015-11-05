@@ -1,7 +1,15 @@
+var api = require('../service/api.js')
+
+
 exports.index = function (req, res) {
 
-    res.render('index', {
-        title: 'Hello, World'
+    api.get(function (data) {
+
+        res.render('index', {
+            title: "React-Boot",
+            items: data
+        });
+
     });
 
 };
