@@ -1,3 +1,6 @@
+apply plugin: 'java'
+apply plugin: 'spring-boot'
+
 buildscript {
     repositories {
         mavenCentral()
@@ -10,9 +13,6 @@ buildscript {
     }
 }
 
-apply plugin: 'java'
-apply plugin: 'spring-boot'
-
 repositories {
     mavenCentral()
     maven { url "http://repo.spring.io/snapshot" }
@@ -21,15 +21,11 @@ repositories {
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
-    // tag::jetty[]
     compile("org.springframework.boot:spring-boot-starter-web") {
         exclude module: "spring-boot-starter-tomcat"
     }
     compile("org.springframework.boot:spring-boot-starter-jetty")
-    // end::jetty[]
-    // tag::actuator[]
     compile("org.springframework.boot:spring-boot-starter-actuator")
-    // end::actuator[]
 
     testCompile("junit:junit")
     testCompile("org.springframework.boot:spring-boot-starter-test")
@@ -40,5 +36,5 @@ targetCompatibility = 1.8
 
 jar {
     baseName = 'react-boot-backend'
-    version =  '0.0.1'
+    version = '0.0.1'
 }

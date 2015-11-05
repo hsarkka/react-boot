@@ -6,7 +6,7 @@ exports.index = function (req, res) {
     api.get(function (data) {
 
         res.render('index', {
-            title: "React-Boot",
+            title: "Hello from React-Boot-Hello",
             items: data
         });
 

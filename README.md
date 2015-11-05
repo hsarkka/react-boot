@@ -1,4 +1,4 @@
-# react-boot
+# react-boot-hello
 
 A "Hello World" using some interesting technologies.
 
@@ -28,13 +28,14 @@ Implemented so far:
 
 * Configuring and provisioning a Vagrant box
 * Starting a Spring Boot application
-* Returning some JSON objects from a REST API
+* REST API returns some dummy JSON objects
 * Express app runs a basic route
+* Frontend app displays a list of objects retrieved over the REST API
 
 To do:
 
-* Connect frontend to REST API
 * Use a database instead of hard-coded data
+* Use e.g. Sass for CSS pre-processing
 * Etc.
 
 

@@ -28,7 +28,6 @@ var Index = React.createClass({
         return (
             <Layout title={this.props.title}>
                 <h1>{this.props.title}</h1>
-                <p>Welcome to {this.props.title}</p>
 
                 {itemNodes}
             </Layout>
