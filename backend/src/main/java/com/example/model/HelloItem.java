@@ -11,6 +11,7 @@ public class HelloItem {
         this.name = name;
     }
 
+    @SuppressWarnings("unused")
     public String getName() {
         return name;
     }
