@@ -3,12 +3,22 @@ var api = require('../service/api.js')
 
 var callback = function (req, res) {
 
-    api.getItem(req.params.id, function (obj) {
+    api.getItem(req.params.id, function (error, obj) {
 
-        res.render('item', {
-            title: obj.name,
-            item: obj
-        });
+        if (error) {
+
+            res.render('error', {
+                error: error
+            });
+
+        } else {
+
+            res.render('item', {
+                title: obj.name,
+                item: obj
+            });
+
+        }
 
     });
 

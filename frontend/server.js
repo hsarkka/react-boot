@@ -10,8 +10,20 @@ app.use(express.static('public'));
 app.set('view engine', 'jsx');
 app.engine('jsx', reactViews.createEngine());
 
+// Routes
 app.get('/', require('./routes/itemList'));
 app.get('/items/:id', require('./routes/item'));
+
+// Error-handling middleware
+/*
+app.use(function (err, req, res, next) {
+    if (!err) {
+        return next();
+    }
+    console.log("Error!");
+    res.send("Error!");
+});
+*/
 
 app.listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));

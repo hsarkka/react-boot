@@ -6,11 +6,12 @@ Frontend:
 
 * Server-side view rendering with **React**
 * **Express** framework
-* **Node.js**
+* **Node.js** environment
 
 Backend:
 
-* **Spring Boot**
+* REST API implemented using **Spring Boot**
+* Caching with **Ehcache**
 
 Infrastructure:
 
@@ -19,7 +20,7 @@ Infrastructure:
 Development environment:
 
 * **Vagrant** development environment
-* **Ansible** provisioning
+* **Ansible** provisioning of required software
 
 
 ## Implementation status
