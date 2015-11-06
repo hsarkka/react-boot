@@ -35,6 +35,7 @@ public class HelloService {
         return items;
     }
 
+    @Cacheable("helloItemById")
     public HelloItem getItem(String id) {
         Optional<HelloItem> item = items.stream()
                 .filter(i -> i.getId().equals(id))
