@@ -18,4 +18,9 @@ public class HelloItem {
         return name;
     }
 
+    @SuppressWarnings("unused")
+    public String getId() {
+        return id;
+    }
+
 }
