@@ -1,5 +1,6 @@
 package com.example.service;
 
+import com.example.exception.ResourceNotFoundException;
 import com.example.model.HelloItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Logic implementation.
@@ -34,10 +36,14 @@ public class HelloService {
     }
 
     public HelloItem getItem(String id) {
-        return items.stream()
-                .filter(item -> item.getId().equals(id))
-                .findFirst()
-                .orElse(null);
+        Optional<HelloItem> item = items.stream()
+                .filter(i -> i.getId().equals(id))
+                .findFirst();
+        if (item.isPresent()) {
+            return item.get();
+        } else {
+            throw new ResourceNotFoundException("Item " + id + " not found");
+        }
     }
 
 }
