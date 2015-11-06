@@ -1,11 +1,11 @@
 var api = require('../service/api.js')
 
 
-exports.index = function (req, res) {
+var callback = function (req, res) {
 
-    api.get(function (data) {
+    api.getAll(function (data) {
 
-        res.render('index', {
+        res.render('itemList', {
             title: "Hello from React-Boot-Hello",
             items: data
         });
@@ -13,3 +13,5 @@ exports.index = function (req, res) {
     });
 
 };
+
+module.exports = callback;
