@@ -26,3 +26,4 @@ rebel*.xml
 
 #### Misc
 *.log
+*.retry

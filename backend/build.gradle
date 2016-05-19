@@ -9,7 +9,9 @@ buildscript {
     }
 
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.3.0.RC1")
+        // The following determines the version of Spring Boot and
+        // dependencies that are managed by it
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.3.5.RELEASE")
     }
 }
 

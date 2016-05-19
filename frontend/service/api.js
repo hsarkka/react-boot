@@ -1,10 +1,10 @@
 var request = require('request');
 
-var HOST = 'http://localhost:8080';
+var API_HOST = 'http://localhost:8080';
 
 exports.getAll = function (callback) {
 
-    var url = HOST + '/helloItems/';
+    var url = API_HOST + '/helloItems/';
     console.log("Getting " + url);
 
     request(url, function (error, response, body) {
@@ -23,7 +23,7 @@ exports.getAll = function (callback) {
 
 exports.getItem = function (id, callback) {
 
-    var url = HOST + '/helloItems/' + id;
+    var url = API_HOST + '/helloItems/' + id;
     console.log("Getting " + url);
 
     request(url, function (error, response, body) {
