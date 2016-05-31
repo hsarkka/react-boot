@@ -1,6 +1,4 @@
 var React = require('react');
-var Layout = require('./layout');
-
 
 var Index = React.createClass({
     propTypes: {
@@ -9,10 +7,10 @@ var Index = React.createClass({
 
     render: function () {
         return (
-            <Layout title='Error'>
-                <h1>Error</h1>
-                {this.props.error.message}
-            </Layout>
+            <div>
+                <h1>Page Not Found</h1>
+                Sorry, no page was found at the given path.
+            </div>
         );
     }
 });
