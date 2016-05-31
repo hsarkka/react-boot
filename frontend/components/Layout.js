@@ -1,4 +1,5 @@
 var React = require('react');
+import { Link } from 'react-router';
 
 var Layout = React.createClass({
     propTypes: {
@@ -7,15 +8,13 @@ var Layout = React.createClass({
 
     render: function () {
         return (
-            <html>
-            <head>
-                <title>{this.props.title}</title>
-                <link rel="stylesheet" href="/style.css"/>
-            </head>
-            <body>
+          <div>
+            <div>
+              <Link to="/">Home</Link>
+            </div>
+
             {this.props.children}
-            </body>
-            </html>
+          </div>
         );
     }
 });

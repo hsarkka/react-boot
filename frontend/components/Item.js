@@ -1,6 +1,4 @@
 var React = require('react');
-var Layout = require('./layout');
-
 
 var Index = React.createClass({
     propTypes: {
@@ -8,10 +6,15 @@ var Index = React.createClass({
     },
 
     render: function () {
+        let name = "";
+        if (this.props.item) {
+            name = this.props.item.name;
+        }
+
         return (
-            <Layout title={this.props.title}>
-                <h1>{this.props.item.name}</h1>
-            </Layout>
+            <div>
+                <h1>{name}</h1>
+            </div>
         );
     }
 });

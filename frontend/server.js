@@ -1,30 +1,53 @@
-var express = require('express');
-var path = require('path');
-var reactViews = require('express-react-views');
+import express from 'express'
+import path from 'path'
+import compression from 'compression'
+import React from 'react'
+import { renderToString } from 'react-dom/server'
+import { match, RouterContext } from 'react-router'
+import routes from './routes'
 
-var app = express();
+var app = express()
 
-app.set('port', process.env.PORT || 3000);
+app.use(compression())
 
-app.use(express.static('public'));
+// Serve our static stuff like CSS
+app.use(express.static(path.join(__dirname, 'public'), {index: false}))
 
-app.set('views', __dirname + '/views');
-app.set('view engine', 'jsx');
-app.engine('jsx', reactViews.createEngine());
-
-// Routes
-app.get('/', require('./routes/itemList'));
-app.get('/items/:id', require('./routes/item'));
-
-// Error-handling middleware
-app.use(function (err, req, res, next) {
-    if (!err) {
-        return next();
+// All routes are basically forwarded to the React Router
+app.get('*', (req, res) => {
+  console.log("Matching route on server side: " + req.url);
+  match({ routes, location: req.url }, (err, redirect, props) => {
+    if (err) {
+      res.status(500).send(err.message)
+    } else if (redirect) {
+      res.redirect(redirect.pathname + redirect.search)
+    } else if (props) {
+      // Hey we made it!
+      const appHtml = renderToString(<RouterContext {...props}/>)
+      res.send(renderPage(appHtml))
+    } else {
+      res.status(404).send('Not Found')
     }
-    console.log(err.stack);
-    res.send("Sorry, there was an internal error");
-});
+  })
+})
 
-app.listen(app.get('port'), function () {
-    console.log('Express server listening on port ' + app.get('port'));
-});
+function renderPage(appHtml) {
+  return `
+    <!doctype html>
+    <html>
+    <head>
+      <title>React Boot Hello</title>
+      <link rel="stylesheet" href="/style.css">
+    </head>
+    <body>
+      <div id="app">${appHtml}</div>
+      <script src="/packed-bundle.js"></script>
+    </body>
+    </html>
+   `
+}
+
+var PORT = process.env.PORT || 3000
+app.listen(PORT, function() {
+  console.log('Express server running at localhost:' + PORT)
+})
