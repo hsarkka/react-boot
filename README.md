@@ -5,9 +5,12 @@ A "Hello World" using some interesting technologies.
 Frontend:
 
 * Universal/isomorphic view rendering with **React**
+* Routing with **React Router**
 * **Redux** state container
 * **Express** framework
 * **Node.js** environment
+* Module bundling with **Webpack**
+* JavaScript compilation with **Babel**
 
 Backend:
 
@@ -66,6 +69,6 @@ Start the frontend app:
 
     cd ~/project/frontend
     npm install
-    node server
+    NODE_ENV=production npm start
 
 The frontend app should now be visible at <http://127.0.0.1:12345/>.
