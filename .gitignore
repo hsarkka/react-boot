@@ -24,6 +24,9 @@ out/
 #### JRebel files
 rebel*.xml
 
+#### Generated web files
+packed-*.js
+
 #### Misc
 *.log
 *.retry
