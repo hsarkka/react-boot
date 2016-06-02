@@ -1,7 +1,7 @@
 var webpack = require('webpack')
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/client.js',
 
   output: {
     path: 'public',
@@ -21,6 +21,10 @@ module.exports = {
         test: /\.js$/, 
         exclude: /node_modules/, 
         loader: 'babel-loader' 
+      },
+      { 
+        test: /\.json$/, 
+        loader: 'json' 
       }
     ]
   }

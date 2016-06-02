@@ -4,7 +4,11 @@ import compression from 'compression'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { match, RouterContext } from 'react-router'
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 import routes from './routes'
+import rootReducer from './reducers/rootReducer'
 
 var app = express()
 
@@ -15,6 +19,10 @@ app.use(express.static(path.join(__dirname, 'public'), {index: false}))
 
 // All routes are basically forwarded to the React Router
 app.get('*', (req, res) => {
+  // Create a fresh Redux store instance
+  let store = createStore(rootReducer, applyMiddleware(thunk));
+  console.log("Initial state: " + JSON.stringify(store.getState()));
+
   console.log("Matching route on server side: " + req.url);
   match({ routes, location: req.url }, (err, redirect, props) => {
     if (err) {
@@ -22,8 +30,13 @@ app.get('*', (req, res) => {
     } else if (redirect) {
       res.redirect(redirect.pathname + redirect.search)
     } else if (props) {
-      // Hey we made it!
-      const appHtml = renderToString(<RouterContext {...props}/>)
+      const viewHtml = 
+        <Provider store={store}>
+          <RouterContext {...props}/>
+        </Provider>;
+
+      const initialStateJson = store.getState();
+      const appHtml = renderToString(viewHtml, initialStateJson);
       res.send(renderPage(appHtml))
     } else {
       res.status(404).send('Not Found')
@@ -31,7 +44,7 @@ app.get('*', (req, res) => {
   })
 })
 
-function renderPage(appHtml) {
+function renderPage(viewHtml, initialStateJson) {
   return `
     <!doctype html>
     <html>
@@ -40,8 +53,11 @@ function renderPage(appHtml) {
       <link rel="stylesheet" href="/style.css">
     </head>
     <body>
-      <div id="app">${appHtml}</div>
+      <div id="app">${viewHtml}</div>
       <script src="/packed-bundle.js"></script>
+      <script>
+        window.__INITIAL_STATE__ = ${initialStateJson};
+        </script>
     </body>
     </html>
    `

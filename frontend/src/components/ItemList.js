@@ -1,44 +1,67 @@
-var React = require('react');
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router';
+import { fetchItems } from '../actions/items';
 
-var Item = React.createClass({
-    propTypes: {
-        itemId: React.PropTypes.string,
-        title: React.PropTypes.string
-    },
+class Item extends React.Component {
 
-    render: function () {
-        var link = "/items/" + this.props.itemId;
+    render () {
+        let link = "/item/" + this.props.itemId;
         return (
             <div>
-                <a href={link}>{this.props.title}</a>
+                <Link to={link}>{this.props.title}</Link>
             </div>
         );
     }
-});
+};
+Item.propTypes = {
+    itemId: React.PropTypes.string,
+    title: React.PropTypes.string
+};
 
 
-var Index = React.createClass({
-    propTypes: {
-        title: React.PropTypes.string,
-        items: React.PropTypes.array
-    },
+class ItemList extends React.Component {
 
-    render: function () {
-        var itemNodes = [];
-        if (this.props.items) {
-            itemNodes = this.props.items.map(function (item) {
-                return <Item key={item.id} itemId={item.id} title={item.name}/>;
-            });
+    componentDidMount() {
+        console.log("ItemList mounted");
+        const { dispatch } = this.props;
+        dispatch(fetchItems());
+    }
+
+    render () {
+        let content = <div>Fetching...</div>;
+
+        if (!this.props.fetching) {
+            let itemNodes = [];
+            if (this.props.items) {
+                console.log("items=" + JSON.stringify(this.props.items));
+                itemNodes = this.props.items.map(function (item) {
+                    return <Item key={item.id} itemId={item.id} title={item.name}/>;
+                });
+            }
+            content = <div>{itemNodes}</div>;
         }
 
         return (
             <div>
                 <h1>Items</h1>
 
-                {itemNodes}
+                {content}
             </div>
         );
     }
-});
 
-module.exports = Index;
+};
+ItemList.propTypes = {
+    title: React.PropTypes.string,
+    items: React.PropTypes.array
+};
+
+// Connects the state into the props for this component.
+// This also injects "dispatch" into the props.
+export default connect(
+    state => ({
+        fetching: state.items.fetching,
+        items: state.items.currentItems
+    })
+)(ItemList);
