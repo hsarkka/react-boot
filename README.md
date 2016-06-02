@@ -4,7 +4,8 @@ A "Hello World" using some interesting technologies.
 
 Frontend:
 
-* Server-side view rendering with **React**
+* Universal/isomorphic view rendering with **React**
+* **Redux** state container
 * **Express** framework
 * **Node.js** environment
 
@@ -30,7 +31,6 @@ Implemented so far:
 * Configuring and provisioning a Vagrant box
 * Starting a Spring Boot application
 * REST API returns some dummy JSON objects
-* Express app runs a basic route
 * Frontend app displays a list of objects retrieved over the REST API
 
 To do:

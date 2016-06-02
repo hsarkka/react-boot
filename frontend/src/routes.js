@@ -10,7 +10,7 @@ export default (
   <Route path='/' component={Layout}>
 
 	<IndexRoute component={ItemList} />
-    <Route path="item/:id" component={Item} />
+    <Route path="item/:itemId" component={Item} />
     
     <Route path="*" component={PageNotFound} />
 

@@ -44,7 +44,7 @@ class ItemList extends React.Component {
 
         return (
             <div>
-                <h1>Items</h1>
+                <h1>Current Hello Items</h1>
 
                 {content}
             </div>
@@ -53,7 +53,6 @@ class ItemList extends React.Component {
 
 };
 ItemList.propTypes = {
-    title: React.PropTypes.string,
     items: React.PropTypes.array
 };
 
