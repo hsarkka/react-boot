@@ -38,8 +38,9 @@ Implemented so far:
 
 To do:
 
-* Use a database instead of hard-coded data
-* Use e.g. Sass for CSS pre-processing
+* Frontend: API calls are currently made from the browser only. They should also be made from the server when doing the initial server-side render
+* Frontend: Use e.g. Sass for CSS pre-processing
+* Backend: Use a database instead of hard-coded data
 * Etc.
 
 
