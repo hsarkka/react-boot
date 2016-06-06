@@ -35,16 +35,21 @@ app.get('*', (req, res) => {
           <RouterContext {...props}/>
         </Provider>;
 
-      const initialStateJson = store.getState();
-      const appHtml = renderToString(viewHtml, initialStateJson);
-      res.send(renderPage(appHtml))
+      // Create an initial Redux state
+      const initialState = store.getState();
+
+      // Render the React components
+      const appHtml = renderToString(viewHtml);
+
+      // Send everything wrapped in an HTML structure
+      res.send(renderPage(appHtml, initialState));
     } else {
       res.status(404).send('Not Found')
     }
   })
 })
 
-function renderPage(viewHtml, initialStateJson) {
+function renderPage(viewHtml, initialState) {
   return `
     <!doctype html>
     <html>
@@ -56,7 +61,7 @@ function renderPage(viewHtml, initialStateJson) {
       <div id="app">${viewHtml}</div>
       <script src="/packed-bundle.js"></script>
       <script>
-        window.__INITIAL_STATE__ = ${initialStateJson};
+        window.__PRELOADED_STATE__ = ${JSON.stringify(initialState)};
         </script>
     </body>
     </html>

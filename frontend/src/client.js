@@ -7,8 +7,11 @@ import thunk from 'redux-thunk';
 import routes from './routes'
 import rootReducer from './reducers/rootReducer'
 
-// Create a fresh Redux store instance
-let store = createStore(rootReducer, applyMiddleware(thunk));
+// Grab the state from a global injected into server-generated HTML
+const preloadedState = window.__PRELOADED_STATE__;
+
+// Create Redux store with initial state
+const store = createStore(rootReducer, preloadedState, applyMiddleware(thunk));
 
 console.log("Rendering from client.js");
 render(
