@@ -10,18 +10,14 @@ export function fetchItems() {
             type: ActionTypes.FETCHING_ITEMS
         });
         
-        api.getAll((error, data) => {
-            if (error) {
-            } else {
-                console.log("Got data: " + JSON.stringify(data));
+        api.getAll().then((data) => {
+            console.log("Got data: " + JSON.stringify(data));
 
-                dispatch({
-                    type: ActionTypes.GET_ITEMS,
-                    items: data
-                });
-            } 
-
-        });
+            dispatch({
+                type: ActionTypes.GET_ITEMS,
+                items: data
+            });
+        }).catch(e => { console.log("Error from API: " + e)});
 
 
     };
@@ -33,19 +29,14 @@ export function fetchItem(itemId) {
 
     return dispatch => {
         
-        api.getItem((error, data) => {
-            if (error) {
-            } else {
-                console.log("Got data: " + JSON.stringify(data));
+        api.getItem(itemId).then((data) => {
+            console.log("Got data: " + JSON.stringify(data));
 
-                dispatch({
-                    type: ActionTypes.GET_ITEM,
-                    item: data
-                });
-            } 
-
-        });
-
+            dispatch({
+                type: ActionTypes.GET_ITEM,
+                item: data
+            });
+        }).catch(e => { console.log("Error from API: " + e)});
 
     };
 }

@@ -2,30 +2,33 @@ import axios from 'axios';
 
 var API_HOST = typeof window === 'undefined' ? 'http://localhost:8080' : '/api';
 
-exports.getAll = function (callback) {
+exports.getAll = function () {
     var url = API_HOST + '/helloItems/';
-    getUrl(url, callback);
+    return getUrl(url);
 }
 
 
-exports.getItem = function (id, callback) {
+exports.getItem = function (id) {
     var url = API_HOST + '/helloItems/' + id;
-    getUrl(url, callback);
+    return getUrl(url);
 }
 
-function getUrl(url, callback) {
+function getUrl(url) {
     console.log("Getting " + url);
 
-    axios.get(url).then(({ status, data, headers }) => {
+    // Return a promise that receives the actual data
+    return axios.get(url).then(({ status, data, headers }) => {
         if (status === 200) {
-            callback(null, data);
+            return data;
         } else {
             console.log("Non-OK status: " + status);
+            throw "Status: " + status;
         }
     }).catch(function (response) {
         if (response instanceof Error) {
             // Something happened in setting up the request that triggered an Error
             console.log('Error', response.message);
+            throw response.message;
         } else {
             // The request was made, but the server responded with a status code
             // that falls out of the range of 2xx
@@ -33,6 +36,7 @@ function getUrl(url, callback) {
             console.log("Status: " + response.status);
             //console.log(response.headers);
             //console.log(response.config);
+            throw "Status: " + response.status;
         }
     });
 }
